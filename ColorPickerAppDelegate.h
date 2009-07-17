@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ColorPickerAppDelegate : NSObject <NSApplicationDelegate> {
+@interface ColorPickerAppDelegate : NSObject {
 }
 
 @end
