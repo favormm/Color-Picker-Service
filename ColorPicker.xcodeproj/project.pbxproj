@@ -126,6 +126,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				45B8C96E10111AE100C10040 /* Archive Release */,
 			);
 			buildRules = (
 			);
@@ -165,6 +166,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		45B8C96E10111AE100C10040 /* Archive Release */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Archive Release";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n### We only run on \"Release\" builds...\nif [[ $BUILD_STYLE != 'Release' ]] ; then\nexit 0\nfi\n\n### Create the output directory...\nMYOUTPUTDIR=\"$SRCROOT/Output\"\nmkdir -p \"$MYOUTPUTDIR\"\n\n### Remove product if it already exists...\nif [[ -d \"$MYOUTPUTDIR/$FULL_PRODUCT_NAME\" ]] ; then\nrm -R \"$MYOUTPUTDIR/$FULL_PRODUCT_NAME\"\nfi\n\n### Copy product to output directory...\ncp -R \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" \"$MYOUTPUTDIR\"\n\n### Remove tar.bz2 archive if already exists...\nif [[ -e \"$MYOUTPUTDIR/$FULL_PRODUCT_NAME.tar.bz2\" ]] ; then\nrm \"$MYOUTPUTDIR/$FULL_PRODUCT_NAME.tar.bz2\"\nfi\n\n### Archive product into tar.bz2\ngnutar --create --bzip2 --file \"$MYOUTPUTDIR/$FULL_PRODUCT_NAME.tar.bz2\" --directory \"$SRCROOT/Output\" \"$FULL_PRODUCT_NAME\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {
